@@ -44,10 +44,10 @@ int main(int argc, char *argv[]) {
 
   // initialize publishers
   image_transport::ImageTransport it(pnh);
-  rgb_pub = it.advertise("/rgb", 1);
+  // rgb_pub = it.advertise("/rgb", 1);
   depth_pub = it.advertise("/depth", 1);
-  segmentation_pub = it.advertise("/segmentation", 1);
-  opticalflow_pub = it.advertise("/opticalflow", 1);
+  // segmentation_pub = it.advertise("/segmentation", 1);
+  // opticalflow_pub = it.advertise("/opticalflow", 1);
 
   // Flightmare
   Vector<3> B_r_BC(0.0, 0.0, 0.3);
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
 
   FrameID frame_id = 0;
   while (ros::ok() && unity_ready) {
-    quad_state.x[QS::POSZ] += 0.1;
+    // quad_state.x[QS::POSZ] += 0.1;
 
     quad_ptr->setState(quad_state);
 
@@ -82,11 +82,11 @@ int main(int argc, char *argv[]) {
 
     ros::Time timestamp = ros::Time::now();
 
-    rgb_camera->getRGBImage(img);
-    sensor_msgs::ImagePtr rgb_msg =
-      cv_bridge::CvImage(std_msgs::Header(), "bgr8", img).toImageMsg();
-    rgb_msg->header.stamp = timestamp;
-    rgb_pub.publish(rgb_msg);
+    // rgb_camera->getRGBImage(img);
+    // sensor_msgs::ImagePtr rgb_msg =
+    //   cv_bridge::CvImage(std_msgs::Header(), "bgr8", img).toImageMsg();
+    // rgb_msg->header.stamp = timestamp;
+    // rgb_pub.publish(rgb_msg);
 
     rgb_camera->getDepthMap(img);
     sensor_msgs::ImagePtr depth_msg =
@@ -94,17 +94,17 @@ int main(int argc, char *argv[]) {
     depth_msg->header.stamp = timestamp;
     depth_pub.publish(depth_msg);
 
-    rgb_camera->getSegmentation(img);
-    sensor_msgs::ImagePtr segmentation_msg =
-      cv_bridge::CvImage(std_msgs::Header(), "bgr8", img).toImageMsg();
-    segmentation_msg->header.stamp = timestamp;
-    segmentation_pub.publish(segmentation_msg);
+    // rgb_camera->getSegmentation(img);
+    // sensor_msgs::ImagePtr segmentation_msg =
+    //   cv_bridge::CvImage(std_msgs::Header(), "bgr8", img).toImageMsg();
+    // segmentation_msg->header.stamp = timestamp;
+    // segmentation_pub.publish(segmentation_msg);
 
-    rgb_camera->getOpticalFlow(img);
-    sensor_msgs::ImagePtr opticflow_msg =
-      cv_bridge::CvImage(std_msgs::Header(), "bgr8", img).toImageMsg();
-    opticflow_msg->header.stamp = timestamp;
-    opticalflow_pub.publish(opticflow_msg);
+    // rgb_camera->getOpticalFlow(img);
+    // sensor_msgs::ImagePtr opticflow_msg =
+    //   cv_bridge::CvImage(std_msgs::Header(), "bgr8", img).toImageMsg();
+    // opticflow_msg->header.stamp = timestamp;
+    // opticalflow_pub.publish(opticflow_msg);
 
     frame_id += 1;
   }

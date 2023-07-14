@@ -44,8 +44,8 @@ int main(int argc, char *argv[]) {
   quad_ptr->setSize(quad_size);
 
   // Initialize gates
-  std::string object_id = "unity_gate";
-  std::string prefab_id = "rpg_gate";
+  std::string object_id = "unit_gate";
+  std::string prefab_id = "rp_gate";
   std::shared_ptr<StaticObject> gate_1 =
     std::make_shared<StaticObject>(object_id, prefab_id);
   gate_1->setPosition(Eigen::Vector3f(0, 10, 2.5));

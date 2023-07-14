@@ -68,6 +68,7 @@
     <node pkg="flightrender" type="RPG_Flightmare.x86_64" name="rpg_flightmare_render" unless="$(arg use_unity_editor)">
     </node>
 
+
     <!-- Autopilot -->
     <node pkg="autopilot" type="autopilot" name="autopilot" output="screen">
       <rosparam file="$(find state_predictor)/parameters/hummingbird.yaml" />

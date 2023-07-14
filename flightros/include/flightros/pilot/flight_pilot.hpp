@@ -14,11 +14,17 @@
 #include <quadrotor_msgs/AutopilotFeedback.h>
 
 // flightlib
+#include <cv_bridge/cv_bridge.h>
+#include <image_transport/image_transport.h>
+
 #include "flightlib/bridges/unity_bridge.hpp"
 #include "flightlib/common/quad_state.hpp"
 #include "flightlib/common/types.hpp"
 #include "flightlib/objects/quadrotor.hpp"
+#include "flightlib/objects/static_gate.hpp"
 #include "flightlib/sensors/rgb_camera.hpp"
+#include <vector>
+#include <string>
 
 using namespace flightlib;
 
@@ -44,6 +50,7 @@ class FlightPilot {
   ros::NodeHandle pnh_;
 
   // publisher
+  image_transport::Publisher depth_pub;
 
   // subscriber
   ros::Subscriber sub_state_est_;
@@ -54,6 +61,9 @@ class FlightPilot {
   // unity quadrotor
   std::shared_ptr<Quadrotor> quad_ptr_;
   std::shared_ptr<RGBCamera> rgb_camera_;
+  std::shared_ptr<StaticObject> gate0;
+  std::vector<std::shared_ptr<StaticObject>> gate_vec;
+
   QuadState quad_state_;
 
   // Flightmare(Unity3D)
